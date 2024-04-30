@@ -14,7 +14,7 @@ struct WeatherStats
 
 int main()
 {
-    const int MONTHS = 5;
+    const int MONTHS = 12;
     WeatherStats WData[MONTHS];
     int avgRainfall = 0;
     int avgSnowfall = 0;
