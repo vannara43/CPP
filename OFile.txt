@@ -1,7 +1,0 @@
-ID #     NAME                     BALANCE DUE
-____     ____________________     ___________
-1006     Sally Sleeper            $     32.36
-1002     Steve Woolston           $   1423.20
-1003     Don McBride              $     12.32
-
-             AVERAGE BALANCE DUE: $    489.29

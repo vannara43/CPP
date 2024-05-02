@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    int SIZE = 10;
+    int const SIZE = 10;
     int arr[SIZE] = {13579, 26791, 26792, 33445, 55555,
                      62483, 77777, 79422, 85647, 93121};
     int userNumber;
