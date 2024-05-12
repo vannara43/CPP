@@ -10,6 +10,7 @@
     "utility": "cpp",
     "valarray": "cpp",
     "vector": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "xlocale": "cpp"
   }
 }
