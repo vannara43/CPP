@@ -23,19 +23,12 @@ public:
         this->established = established;
         return established;
     }
-    virtual void show()
-    {
-        cout << "Transportation Name : " << getName() << endl;
-        cout << "Established Year : " << getEstablished() << endl;
-    }
+    virtual void show() = 0;
 
-    virtual void sound()
-    {
-        cout << "This is a base class" << endl;
-    }
+    virtual void sound() = 0;
 };
 
-Transportation::Transportation(string name, int established)
+Transportation::Transportation(string name, int established) // constructor
 {
     this->name = name;
     this->established = established;
@@ -192,14 +185,12 @@ public:
 
 int main()
 {
-    Transportation t("Welcome to our Transportation Station.", 1980);
+    Transportation t();
     Car c("Honda Car", 1948, 2005, 140, 56000, 45);
     Boat b("Telsa Boat", 1898, 2012, 40, 8000, 30);
     ElectricCar ec("Toyota Prius", 1997, 2019, 110, 131000, 55, 10000, 203);
 
     cout << endl;
-    t.show();
-    t.sound();
     cout << endl;
     c.show();
     c.sound();
