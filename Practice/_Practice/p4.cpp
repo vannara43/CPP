@@ -1,4 +1,5 @@
 // Practice 4: A Program for User Input
+
 #include <iostream>
 using namespace std;
 int main()

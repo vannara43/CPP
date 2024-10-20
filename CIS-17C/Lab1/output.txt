@@ -1,0 +1,2 @@
+Slope (m): 0.55555
+Intercept (b): -17.77716

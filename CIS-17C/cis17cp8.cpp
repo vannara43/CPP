@@ -61,15 +61,38 @@ int main(int argc, char **argv)
     return 0;
 }
 
-int read(char[][COLMAX], int &)
+int read(char array[][COLMAX], int &rows)
 {
+    int cols = 0;
+    for (int i = 0; i < rows; ++i)
+    {
+        cin >> array[i];
+        cols = strlen(array[i]);
+    }
+    return cols;
+}
 
-} // Outputs row and columns detected from input
-void sort(char[][COLMAX], int, int)
+void sort(char array[][COLMAX], int rows, int cols)
 {
+    for (int i = 0; i < rows - 1; ++i)
+    {
+        for (int j = i + 1; j < rows; ++j)
+        {
+            if (strcmp(array[i], array[j]) > 0)
+            {
+                char temp[COLMAX];
+                strcpy(temp, array[i]);
+                strcpy(array[i], array[j]);
+                strcpy(array[j], temp);
+            }
+        }
+    }
+}
 
-} // Sort by row
-void print(const char[][COLMAX], int, int)
+void print(const char array[][COLMAX], int rows, int cols)
 {
-
-} // Print the sorted 2-D array
+    for (int i = 0; i < rows; ++i)
+    {
+        cout << array[i] << endl;
+    }
+}
