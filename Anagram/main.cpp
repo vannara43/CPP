@@ -93,8 +93,8 @@ void useHint(const string &word, int &hintsUsed, int &score);                   
 void displayAchievements();                                                                                                                                          // Show achievements
 void updateAchievements(bool wonGame, int score, int hintsUsed, int timeTaken);                                                                                      // Update achievements
 void playGame();                                                                                                                                                     // Game round placeholder
-void quickSort(array<string, maxWords> &words, int low, int high);
-int partition(array<string, maxWords> &words, int low, int high);
+void quickSort(array<string, maxWords> &words, int low, int high);                                                                                                   // QuickSort function
+int partition(array<string, maxWords> &words, int low, int high);                                                                                                    // Partition for QuickSort
 
 // Define the number of achievements
 const int numAchievements = 4;
@@ -120,13 +120,19 @@ struct Achievement
 
 struct TrieNode
 {
+    // Array for children
     TrieNode *children[26];
+
+    // End of word marker
     bool isEndOfWord;
 
     TrieNode()
     {
         for (int i = 0; i < 26; i++)
+            // Initialize children
             children[i] = nullptr;
+
+        // Default to false
         isEndOfWord = false;
     }
 };
@@ -134,34 +140,54 @@ struct TrieNode
 class Trie
 {
 private:
+    // Root node
     TrieNode *root;
 
 public:
+    // Initialize root
     Trie() { root = new TrieNode(); }
 
     void insert(const string &word)
     {
+        // Start from root
         TrieNode *node = root;
+
         for (char c : word)
         {
+            // Map char to index
             int index = c - 'a';
+
+            // Create node
             if (!node->children[index])
                 node->children[index] = new TrieNode();
+
+            // Move to child
             node = node->children[index];
         }
+
+        // Mark end of word
         node->isEndOfWord = true;
     }
 
     bool search(const string &word)
     {
+        // Start from root
         TrieNode *node = root;
+
         for (char c : word)
         {
+            // Map char to index
             int index = c - 'a';
             if (!node->children[index])
+
+                // Character not found
                 return false;
+
+            // Move to child
             node = node->children[index];
         }
+
+        // Check end marker
         return node->isEndOfWord;
     }
 };
@@ -174,7 +200,8 @@ struct Graph
     // Add an edge between two nodes
     void addEdge(const string &u, const string &v)
     {
-        adjList[u].insert(v); // Use insert instead of push_back
+        // Use insert instead of push_back
+        adjList[u].insert(v);
     }
 
     // Display the adjacency list of the graph
@@ -183,7 +210,9 @@ struct Graph
         for (const auto &pair : adjList)
         {
             cout << pair.first << " -> ";
-            for (const string &v : pair.second) // Iterate over the set
+
+            // Iterate over the set
+            for (const string &v : pair.second)
             {
                 cout << v << " ";
             }
@@ -862,24 +891,38 @@ void quickSort(array<string, maxWords> &words, int low, int high)
 {
     if (low < high)
     {
-        int pi = partition(words, low, high); // Partition index
-        quickSort(words, low, pi - 1);        // Recursively sort left subarray
-        quickSort(words, pi + 1, high);       // Recursively sort right subarray
+        // Get pivot index
+        int pi = partition(words, low, high);
+
+        // Sort left part
+        quickSort(words, low, pi - 1);
+
+        // Sort right part
+        quickSort(words, pi + 1, high);
     }
 }
 
 int partition(array<string, maxWords> &words, int low, int high)
 {
+    // Choose pivot
     string pivot = words[high];
+
+    // Initialize index
     int i = low - 1;
     for (int j = low; j <= high - 1; j++)
     {
+        // Compare with pivot
         if (words[j] < pivot)
         {
             i++;
+
+            // Swap smaller element
             swap(words[i], words[j]);
         }
     }
+    // Place pivot correctly
     swap(words[i + 1], words[high]);
+
+    // Return pivot index
     return i + 1;
 }
