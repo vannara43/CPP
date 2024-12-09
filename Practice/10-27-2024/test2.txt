@@ -1,0 +1,89 @@
+// push a link to the front
+void pshFrnt(Link a,Linklist){
+    //set a temporary pointer to store the value and nxt pointer of the front of the list
+    // doing this because we do not have a copy constructor, we must deep copy!
+    Link temp= create( list->data);
+    temp->lnkNext= list->lnkNext;
+
+    //override previous front data and update the next pointers
+    list->data= a->data;
+    while( temp !=nullptr){
+        list->lnkNext=temp;
+        //
+        list= list->lnkNext;
+        list->data= temp->data;
+        temp=temp->lnkNext;
+    }
+
+}
+
+//push a link to the end
+void pshBack(Linka,Link list){
+     Link temp=create(a->data);
+        temp->lnkNext=nullptr;
+    //case 1: only 1 element, change lnknext;
+    if(list->lnkNext==nullptr){
+
+       list->lnkNext= temp;
+       return;
+    }
+     //case 2: existing list; traverse and change;
+     Link* vals;
+     vals= list;
+     while(vals->lnkNext != nullptr){
+        vals= vals->lnkNext;
+     }
+    vals->lnkNext=temp;
+}
+
+Link popFrnt(Linklist){
+    // case 1: last node; NOTE: if delete, will print junk, val is left. FIX LATER
+    if( list->lnkNext== nullptr || list==nullptr){
+        list=nullptr;
+        return list;
+    }
+   //case 2: existing list. In this case set a temp var to store the next val to be front
+    Link* temp= new Link;
+    temp->data=list->lnkNext->data;
+    // if there exist another val after the second then lnk to the temp var
+    if( list->lnkNext->lnkNext!=nullptr){
+    temp->lnkNext= list->lnkNext->lnkNext;
+    }
+    // else there was only 2.
+    else{
+        temp->lnkNext=nullptr;
+    }
+    // update list data to have the succ val and point to the third.
+    //lose access to first.don't forget to delete that one.
+    list->data=temp->data;
+    list->lnkNext=temp->lnkNext;
+
+  return list;
+}
+
+//pull/pop a link from the back
+Link popBack(Linklist){
+
+    //case1: 1 element, simple
+    if ( list->lnkNext==nullptr){
+        list=nullptr;
+        return list;
+    }
+    //case 2: traverse through list keeping track of the curr node(prev)
+    // and the succ node(next).
+        Link* prev;
+        prev=list;
+        Link* succ;
+        succ= prev->lnkNext;
+
+    while ( succ->lnkNext!=nullptr){
+        prev=prev->lnkNext;
+        succ= prev->lnkNext;
+    }
+        //once the last node is located, deallocate memory and update prev next.
+        delete succ;
+        succ=nullptr;
+        prev->lnkNext=nullptr;
+    return list;
+
+};

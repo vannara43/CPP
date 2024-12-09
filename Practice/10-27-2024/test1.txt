@@ -1,0 +1,152 @@
+#include <iostream>
+#include <cstdlib>     // NULL pointer
+#include "Link.h"
+using namespace std;
+
+class LinkedList {
+private:
+    Link *head;
+    Link *tail;
+
+public:
+    LinkedList() : head(nullptr), tail(nullptr) {}
+
+    Link *fillLst(int n) {
+        if (n <= 0) return nullptr;
+        head = new Link{1, nullptr};
+        Link *temp = head;
+        for (int i = 2; i <= n; i++) {
+            Link *newLink = new Link{i, nullptr};
+            temp->lnkNext = newLink;
+            temp = newLink;
+        }
+        tail = temp;
+        return head;
+    }
+
+    void prntLst(Link *next) const {
+        while (next != nullptr) {
+            cout << next->data << " ";
+            next = next->lnkNext;
+        }
+        cout << endl;
+    }
+
+    void destroy(Link *front) {
+        while (front != nullptr) {
+            Link *temp = front;
+            front = front->lnkNext;
+            delete temp;
+        }
+        head = tail = nullptr;
+    }
+
+    Link *create(int value) {
+        return new Link{value, nullptr};
+    }
+
+    void pshFrnt(Link *&front, Link *newLink) {
+        if (front == nullptr) {
+            front = newLink;
+            tail = newLink;
+        } else {
+            newLink->lnkNext = front;
+            front = newLink;
+        }
+    }
+
+    void pshBack(Link *front, Link *newLink) {
+        if (front == nullptr) {
+            front = newLink;
+            tail = newLink;
+        } else {
+            Link *temp = front;
+            while (temp->lnkNext != nullptr) {
+                temp = temp->lnkNext;
+            }
+            temp->lnkNext = newLink;
+            tail = newLink;
+        }
+    }
+
+    Link *popFrnt(Link *&front) {
+        if (front == nullptr) return nullptr;
+        Link *temp = front;
+        front = front->lnkNext;
+        temp->lnkNext = nullptr;
+        if (front == nullptr) tail = nullptr;
+        return temp;
+    }
+
+    Link *popBack(Link *front) {
+        if (front == nullptr) return nullptr;
+        if (front == tail) {
+            Link *temp = front;
+            front = tail = nullptr;
+            return temp;
+        }
+        Link *temp = front;
+        while (temp->lnkNext != tail) {
+            temp = temp->lnkNext;
+        }
+        Link *lastLink = tail;
+        temp->lnkNext = nullptr;
+        tail = temp;
+        return lastLink;
+    }
+};
+
+// Re-declare prototypes as they now belong to the LinkedList class
+Link *fillLst(int n) {
+    LinkedList list;
+    return list.fillLst(n);
+}
+
+void prntLst(Link *next) {
+    LinkedList list;
+    list.prntLst(next);
+}
+
+void destroy(Link *front) {
+    LinkedList list;
+    list.destroy(front);
+}
+
+Link *create(int value) {
+    LinkedList list;
+    return list.create(value);
+}
+
+void pshFrnt(Link *&front, Link *newLink) {
+    LinkedList list;
+    list.pshFrnt(front, newLink);
+}
+
+void pshBack(Link *front, Link *newLink) {
+    LinkedList list;
+    list.pshBack(front, newLink);
+}
+
+Link *popFrnt(Link *&front) {
+    LinkedList list;
+    return list.popFrnt(front);
+}
+
+Link *popBack(Link *front) {
+    LinkedList list;
+    return list.popBack(front);
+}
+
+int main(int argc, char **argv) {
+    // Declare variables
+    Link *lnk1 = fillLst(5);
+
+    // Printing all the data elements in the linked list
+    prntLst(lnk1);
+
+    // Delete all the allocated memory
+    destroy(lnk1);
+
+    // Exit stage right
+    return 0;
+}
