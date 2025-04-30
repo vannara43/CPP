@@ -59,8 +59,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Repository/CPP/Anagram",
-      "program": "c:/Repository/CPP/Anagram/build/Debug/outDebug",
+      "cwd": "c:/Repository/CPP/Practice/04-29-2025",
+      "program": "c:/Repository/CPP/Practice/04-29-2025/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
